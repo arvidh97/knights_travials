@@ -2,39 +2,56 @@ class KnightPathFinder
 
     def initialize(pos)
         @pos = pos 
-        @considered_positions = []
+        @considered_positions = [@pos]
     end
 
     def self.valid_moves(pos)
         row, col = pos
         all_moves = []
 
-        if row - 2 > 0 && col + 1 < 7
-            all_moves << [row - 2, col + 1]
+        constant_moves = [[-2, 1],[-1, 2],[-2,-1],[-1,-2],[1,2],[2,1],[1,-2],[2,-1]]
+        constant_moves.each do |dist| 
+            dx, dy = dist
+            new_x = row + dx 
+            new_y = col + dy 
+            new_pos = [new_x, new_y]
+            all_moves << new_pos if num_check(new_pos)
         end
-        if row - 1 > 0 && col + 2 < 7
-            all_moves << [row -1, col + 2]
-        end
-        if row + 1 < 7 && col + 2 < 7
-            all_moves << [row + 1, col + 2]
-        end
-        if row + 2 < 7 && col + 1 < 7
-            all_moves << [row + 2, col +1]
-        end
-        if row + 2 < 7 && col - 1 > 0
-            all_moves << [row + 2, col - 1]
-        end
-        if row + 1 < 7 && col - 2 > 0
-            all_moves << [row + 1, col - 2]
-        end
-        if row - 1 > 0 && col - 2 > 0
-            all_moves << [row - 1, col - 2]
-        end
-        if row - 2 > 0 && col - 1 > 0
-            all_moves << [row - 2, col - 1]
-        end
-        all_moves
 
+        # if row - 2 > 0 && col + 1 < 7
+        #     all_moves << [row - 2, col + 1]
+        # end
+        # if row - 1 > 0 && col + 2 < 7
+        #     all_moves << [row -1, col + 2]
+        # end
+        # if row + 1 < 7 && col + 2 < 7
+        #     all_moves << [row + 1, col + 2]
+        # end
+        # if row + 2 < 7 && col + 1 < 7
+        #     all_moves << [row + 2, col +1]
+        # end
+        # if row + 2 < 7 && col - 1 > 0
+        #     all_moves << [row + 2, col - 1]
+        # end
+        # if row + 1 < 7 && col - 2 > 0
+        #     all_moves << [row + 1, col - 2]
+        # end
+        # if row - 1 > 0 && col - 2 > 0
+        #     all_moves << [row - 1, col - 2]
+        # end
+        # if row - 2 > 0 && col - 1 > 0
+        #     all_moves << [row - 2, col - 1]
+        # end
+        # all_moves
+    end
+
+    def num_check(new_pos)
+        row, col = new_pos
+        if row >= 0 && row  <= 7 && col >= 0 && col <= 7
+            return true
+        else 
+            false
+        end
     end
 
     def build_move_tree
@@ -42,7 +59,9 @@ class KnightPathFinder
     end
 
     def new_move_positions(pos)
-        KnightPathFinder.valid_moves(pos).delete(@considered_positions)
+        KnightPathFinder.valid_moves(pos).each do |ele| 
+            if !@considered_positions.include?(ele)
+        
     end
 
 
