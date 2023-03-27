@@ -60,7 +60,7 @@ you have considered; initialize it to the array containing just the starting
 pos. Write an **instance** method `#new_move_positions(pos)`; this should call
 the `::valid_moves` class method, but filter out any positions that are already
 in `@considered_positions`. It should then add the remaining new positions to
-`@considered_positions` and **return** these new positions.
+`@consgitidered_positions` and **return** these new positions.
 
 ## Phase II: `#build_move_tree`
 

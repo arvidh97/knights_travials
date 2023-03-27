@@ -55,14 +55,25 @@ class KnightPathFinder
     end
 
     def build_move_tree
+        arr = [KnightPathFinder.valid_moves(@pos)]
+
+        while arr.empty? == false 
+            @pos == arr.shift 
+            arr += new_move_positions(@pos)
+        end
 
     end
 
     def new_move_positions(pos)
-        KnightPathFinder.valid_moves(pos).each do |ele| 
-            if !@considered_positions.include?(ele)
+        new_moves = KnightPathFinder.valid_moves(pos).select do |ele| 
+            !@considered_positions.include?(ele)
+        end
+        @considered_positions << new_moves 
+        return new_moves
+
         
     end
+
 
 
 end
