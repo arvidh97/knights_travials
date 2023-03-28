@@ -1,7 +1,7 @@
 class PolyTreeNode
 
     def initialize
-        @root_node = pos
+        @root_node = root_node
     end
 
 

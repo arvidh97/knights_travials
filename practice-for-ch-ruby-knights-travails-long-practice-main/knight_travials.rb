@@ -1,3 +1,5 @@
+require_relative "poly_tree.rb"
+
 class KnightPathFinder
 
     def initialize(pos)
@@ -55,11 +57,12 @@ class KnightPathFinder
     end
 
     def build_move_tree
-        arr = [KnightPathFinder.valid_moves(@pos)]
+        start_pos = PolyTreeNode.new.root_node
+        arr = KnightPathFinder.valid_moves(start_pos)
 
-        while arr.empty? == false 
-            @pos == arr.shift 
-            arr += new_move_positions(@pos)
+        while !arr.empty?  
+            start_pos = arr.shift 
+            arr += new_move_positions(start_pos)
         end
 
     end
